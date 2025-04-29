@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         int[] nums = {3, 1, 5, 2, 1, 4};
 
-        SelectionSort(nums); // {1, 1, 2, 3, 4, 5}
+        InsertionSort(nums); // {1, 1, 2, 3, 4, 5}
 
         System.out.println(Arrays.toString(nums));
     }
@@ -66,6 +66,29 @@ public class Main {
             int temp = nums[i];
             nums[i] = nums[minIdx];
             nums[minIdx] = temp;
+        }
+    }
+
+    /*
+    * 315214 InsertionSort starts from the second element and check in front if there is an element bigger than it
+    * 3  15214
+    * 1  35214 (it will overwrite it)
+    * 13 5214 this iteration doesn't do anything because 3 is smaller than 5
+    * 135 514 (overwrites 2)
+    * 123 514
+    * 1123 14
+    * 11234 5
+    *  */
+
+    public static void InsertionSort(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            int key = nums[i];
+            int j = i - 1;
+            while (j >= 0 && nums[j] > key) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+            nums[j + 1] = key;
         }
     }
 }
